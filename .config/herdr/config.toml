@@ -1,0 +1,118 @@
+onboarding = false
+# Herdr configuration
+# Place this file at ~/.config/herdr/config.toml
+
+[theme]
+name = "tokyo-night"
+
+[terminal]
+# Use the platform-appropriate shell startup behavior.
+shell_mode = "auto"
+
+# New panes inherit the current pane directory.
+new_cwd = "follow"
+
+[keys]
+# Use Ctrl+A as the prefix.
+prefix = "ctrl+a"
+
+# Reload with prefix+r and enter resize mode with prefix+shift+r.
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+
+# Workspace navigation.
+previous_workspace = "prefix+shift+k"
+next_workspace = "prefix+shift+j"
+switch_workspace = "prefix+alt+1..9"
+
+# Agent navigation.
+previous_agent = "prefix+alt+k"
+next_agent = "prefix+alt+j"
+focus_agent = "prefix+alt+shift+1..9"
+
+# Worktree actions.
+new_worktree = "prefix+shift+g"
+open_worktree = "prefix+alt+o"
+remove_worktree = "prefix+alt+x"
+
+# Navigate mode.
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+navigate_pane_left = "h"
+navigate_pane_down = "down"
+navigate_pane_up = "up"
+navigate_pane_right = "l"
+
+# Split down or right.
+split_horizontal = "prefix+minus"
+split_vertical = ["prefix+v", "prefix+|"]
+
+# Pane navigation.
+focus_pane_left = ["prefix+h", "ctrl+alt+h"]
+focus_pane_down = ["prefix+j", "ctrl+alt+j"]
+focus_pane_up = ["prefix+k", "ctrl+alt+k"]
+focus_pane_right = ["prefix+l", "ctrl+alt+l"]
+
+# Copy mode and common tmux-style bindings.
+copy_mode = ["prefix+[", "prefix+/"]
+detach = ["prefix+q", "prefix+d"]
+rename_tab = ["prefix+shift+t", "prefix+comma"]
+
+# Swap the current pane with its adjacent pane.
+[[keys.command]]
+key = "prefix+shift+left"
+type = "shell"
+command = "herdr pane swap --current --direction left"
+description = "swap pane left"
+
+[[keys.command]]
+key = "prefix+shift+down"
+type = "shell"
+command = "herdr pane swap --current --direction down"
+description = "swap pane down"
+
+[[keys.command]]
+key = "prefix+shift+up"
+type = "shell"
+command = "herdr pane swap --current --direction up"
+description = "swap pane up"
+
+[[keys.command]]
+key = "prefix+shift+right"
+type = "shell"
+command = "herdr pane swap --current --direction right"
+description = "swap pane right"
+
+# Break the current pane out into a new tab (tmux: prefix+!).
+# $HERDR_PANE_ID doesn't work here: type=shell spawns a detached process
+# that isn't attached to any pane, so that env var never resolves. Look up
+# the actually-focused pane through pane list instead.
+[[keys.command]]
+key = ["prefix+!", "prefix+shift+1"]
+type = "shell"
+command = "herdr pane move \"$(herdr pane list | jq -r '[.result.panes[] | select(.focused==true) | .pane_id][0]')\" --new-tab"
+description = "break pane into new tab"
+
+[worktrees]
+directory = "~/.herdr/worktrees"
+
+[ui]
+agent_panel_sort = "priority"
+show_agent_labels_on_pane_borders = true
+hide_tab_bar_when_single_tab = true
+pane_borders = true
+pane_gaps = false
+pane_outer_borders = false
+
+[ui.toast]
+delivery = "herdr"
+delay_seconds = 2
+
+[ui.sound]
+enabled = true
+
+[session]
+resume_agents_on_restore = true
+
+[experimental]
+pane_history = true

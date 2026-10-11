@@ -1,0 +1,20 @@
+-- Switch workspaces with a three-finger horizontal touchpad swipe.
+hl.gesture({
+  fingers = 3,
+  direction = "horizontal",
+  action = "workspace",
+})
+
+hl.config({
+  input={
+    kb_layout = "us, ru",
+    kb_options = "grp:toggle",
+    touchpad = {
+      tap_to_click = true,
+      tap_button_map = "lrm",
+      clickfinger_behavior = false,
+      natural_scroll = true,
+      disable_while_typing = true,
+    },
+  },
+})

@@ -1,0 +1,10 @@
+hl.config({
+  input={
+    kb_layout = "us, ru",
+    kb_options = "grp:toggle",
+    touchpad = {
+      ["tap-to-click"] = true,
+      natural_scroll = false,
+    },
+  },
+})
