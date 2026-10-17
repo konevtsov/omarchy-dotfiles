@@ -1,0 +1,16 @@
+{
+  "plugins": {
+    "nvim-treesitter": {
+      "rev": "d4a9b23a383266bdb0bfb42d565f31e83f27be5e",
+      "src": "https://github.com/nvim-treesitter/nvim-treesitter"
+    },
+    "pustota.nvim": {
+      "rev": "5ca9d5bdcbf0311074b202388ee1c962b8853073",
+      "src": "https://github.com/pustota-theme/pustota.nvim"
+    },
+    "tokyonight.nvim": {
+      "rev": "cdc07ac78467a233fd62c493de29a17e0cf2b2b6",
+      "src": "https://github.com/folke/tokyonight.nvim"
+    }
+  }
+}

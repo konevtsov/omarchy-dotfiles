@@ -9,14 +9,8 @@ hl.animation({
   style = "slidefade",
 })
 
--- Make default windows 5 percentage points more transparent.
-o.window({ tag = "default-opacity" }, { opacity = "0.96 0.935" })
-
--- Keep Obsidian fully opaque while preserving the default opacity elsewhere.
-o.window({ class = "^md\\.obsidian\\.Obsidian$" }, {
-  tag = "-default-opacity",
-  opacity = "1 1",
-})
+-- Keep all application windows fully opaque.
+o.window({ tag = "default-opacity" }, { opacity = "1 1" })
 
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#general
 -- hl.config({
