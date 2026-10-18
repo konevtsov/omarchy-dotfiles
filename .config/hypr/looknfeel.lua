@@ -12,6 +12,12 @@ hl.animation({
 -- Keep all application windows fully opaque.
 o.window({ tag = "default-opacity" }, { opacity = "1 1" })
 
+-- Keep scrolling-layout columns nearly full-width and remove Hyprland window borders.
+hl.config({
+  general = { gaps_out = 0, border_size = 0 },
+  scrolling = { column_width = 0.97 },
+})
+
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#general
 -- hl.config({
 --   general = {
@@ -29,7 +35,7 @@ o.window({ tag = "default-opacity" }, { opacity = "1 1" })
 hl.config({
   decoration = {
     -- Use round window corners.
-    rounding = 4,
+    rounding = 0,
 
     -- Dim unfocused windows (0.0 = no dim, 1.0 = fully dimmed).
   --   dim_inactive = true,

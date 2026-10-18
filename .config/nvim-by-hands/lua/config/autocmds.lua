@@ -2,6 +2,37 @@ local group = vim.api.nvim_create_augroup("user_config", {
     clear = true,
 })
 
+-- Remove Kitty's configured padding only while Neovim is using that window.
+local kitty_window_id = vim.env.KITTY_WINDOW_ID
+local function set_kitty_padding(value)
+    if not kitty_window_id or vim.fn.executable("kitty") ~= 1 then
+        return
+    end
+
+    vim.fn.system({
+        "kitty",
+        "@",
+        "set-spacing",
+        "--match",
+        "id:" .. kitty_window_id,
+        "padding=" .. value,
+    })
+end
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    group = group,
+    callback = function()
+        set_kitty_padding("0")
+    end,
+})
+
+vim.api.nvim_create_autocmd("VimLeavePre", {
+    group = group,
+    callback = function()
+        set_kitty_padding("default")
+    end,
+})
+
 -- Highlight copied text
 vim.api.nvim_create_autocmd("TextYankPost", {
     group = group,

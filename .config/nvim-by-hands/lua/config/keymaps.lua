@@ -5,23 +5,26 @@ map("i", "jj", "<Esc>", { desc = "Escape insert mode" })
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- map("n", "<leader>e", "<cmd>Ex<cr>", {
+--     desc = "Open netrw",
+-- })
+
 map("n", "<leader>w", "<cmd>write<cr>", {
-    desc = "Save file",
+	desc = "Save file",
 })
 
 map("n", "<leader>q", "<cmd>quit<cr>", {
-    desc = "Quit",
+	desc = "Quit",
 })
 
 map("n", "<Esc>", "<cmd>nohlsearch<cr>", {
-    desc = "Clear search highlight",
+	desc = "Clear search highlight",
 })
 
 map("n", "<C-h>", "<C-w>h")
 map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
-
 
 -- Yank settings through Shift
 map("v", "Y", '"+y', { desc = "Copy selection to system clipboard" })
@@ -31,4 +34,3 @@ map("n", "P", '"+p', { desc = "Paste from system clipboard after" })
 map("n", "<M-P>", '"+P', { desc = "Paste from system clipboard before" })
 
 map("v", "P", '"+p', { desc = "Paste from system clipboard over selection" })
-

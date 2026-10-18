@@ -19,6 +19,7 @@ opt.termguicolors = true
 opt.cursorline = true
 opt.signcolumn = "yes"
 opt.scrolloff = 8
+opt.fillchars:append({ eob = " " })
 
 -- Splits
 opt.splitright = true
@@ -30,5 +31,4 @@ opt.undofile = true
 -- Мышь
 opt.mouse = "a"
 
--- Clipboard
-opt.clipboard = ""
+vim.g.have_nerd_font = true

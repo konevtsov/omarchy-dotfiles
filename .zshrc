@@ -162,6 +162,7 @@ alias k=kubectl
 # Nvim and experiments
 alias n=nvim
 alias nh="env NVIM_APPNAME=nvim-by-hands nvim"
+alias nk="env NVIM_APPNAME=nvim-kickstart nvim ~/.config/nvim-kickstart/"
 alias nn="/usr/bin/nvim"
 
 # Herdr

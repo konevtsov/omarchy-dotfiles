@@ -1,54 +1,71 @@
-vim.lsp.config("basedpyright", {
-    cmd = { "basedpyright-langserver", "--stdio" },
-    filetypes = { "python" },
+require("mason").setup()
 
-    root_markers = {
-        "pyproject.toml",
-        "setup.py",
-        "setup.cfg",
-        "requirements.txt",
-        ".git",
-    },
+vim.lsp.config("*", {
+	capabilities = require("blink.cmp").get_lsp_capabilities(),
 })
 
-vim.lsp.enable("basedpyright")
+--------------------------------------------------
+----------   LSP Servers settings   --------------
+--------------------------------------------------
+
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			diagnostics = {
+				globals = { "vim", "Snacks" },
+			},
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+				checkThirdParty = false,
+			},
+		},
+	},
+})
+
+--------------------------------------------------
+
+require("mason-lspconfig").setup({
+	ensure_installed = {
+		"basedpyright",
+		"lua_ls",
+	},
+
+	automatic_enable = true,
+})
 
 vim.diagnostic.config({
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = true,
+	virtual_text = true,
+	signs = true,
+	underline = true,
+	update_in_insert = false,
+	severity_sort = true,
 })
 
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, {
-    desc = "Go to definition",
+local group = vim.api.nvim_create_augroup("user_lsp", {
+	clear = true,
 })
 
-vim.keymap.set("n", "K", vim.lsp.buf.hover, {
-    desc = "Hover documentation",
-})
+vim.api.nvim_create_autocmd("LspAttach", {
+	group = group,
 
-vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, {
-    desc = "Rename symbol",
-})
+	callback = function(args)
+		local function map(lhs, rhs, desc)
+			vim.keymap.set("n", lhs, rhs, {
+				buffer = args.buf,
+				desc = desc,
+			})
+		end
 
-vim.keymap.set("n", "gr", vim.lsp.buf.references, {
-    desc = "References",
-})
-
-vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, {
-    desc = "Show diagnostic",
-})
-
-vim.keymap.set("n", "[d", function()
-    vim.diagnostic.jump({ count = -1 })
-end, {
-    desc = "Previous diagnostic",
-})
-
-vim.keymap.set("n", "]d", function()
-    vim.diagnostic.jump({ count = 1 })
-end, {
-    desc = "Next diagnostic",
+		map("gd", vim.lsp.buf.definition, "Go to definition")
+		map("K", vim.lsp.buf.hover, "Hover documentation")
+		map("gr", vim.lsp.buf.references, "Find references")
+		map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+		map("<leader>d", vim.diagnostic.open_float, "Show diagnostic")
+		map("[d", function()
+			vim.diagnostic.jump({ count = -1 })
+		end, "Previous diagnostic")
+		map("]d", function()
+			vim.diagnostic.jump({ count = 1 })
+		end, "Next diagnostic")
+	end,
 })
