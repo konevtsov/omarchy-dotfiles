@@ -1,24 +1,20 @@
+vim.g.mapleader = " "
+vim.g.maplocalleader = "\\"
+
 local map = vim.keymap.set
 
 map("i", "jj", "<Esc>", { desc = "Escape insert mode" })
 
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-
--- map("n", "<leader>e", "<cmd>Ex<cr>", {
---     desc = "Open netrw",
--- })
-
 map("n", "<leader>w", "<cmd>write<cr>", {
-	desc = "Save file",
+    desc = "Save file",
 })
 
 map("n", "<leader>q", "<cmd>quit<cr>", {
-	desc = "Quit",
+    desc = "Quit",
 })
 
 map("n", "<Esc>", "<cmd>nohlsearch<cr>", {
-	desc = "Clear search highlight",
+    desc = "Clear search highlight",
 })
 
 map("n", "<C-h>", "<C-w>h")

@@ -1,10 +1,13 @@
 local vim_plugins_ok, vim_plugins_not_ok = pcall(vim.pack.add, {
 	-- Theme
+	--
 	-- "https://github.com/pustota-theme/pustota.nvim",
+
 	{
 		src = "https://github.com/catppuccin/nvim",
 		name = "catppuccin",
 	},
+
 	-- TreeSitter
 	"https://github.com/nvim-treesitter/nvim-treesitter",
 
@@ -48,7 +51,7 @@ if not vim_plugins_ok then
 	vim.notify(vim_plugins_not_ok, vim.log.levels.ERROR)
 end
 
-vim.cmd.colorscheme("catppuccin-nvim")
+vim.cmd.colorscheme("catppuccin")
 require("plugins.snacks")
 require("plugins.neotree")
 require("plugins.which-key")
